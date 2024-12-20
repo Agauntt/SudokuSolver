@@ -98,10 +98,13 @@ class Board:
                 if output > 0:  
                     n_text = font.render(str(output), True, pg.Color("black"))
                     SCREEN.blit(n_text, pg.Vector2((col * 80) + offset + 3, (row * 80) + offset - 3))
-                elif output < 0:
+                elif output < 0 and output > -10:
                     # print("This appears to be a note")
-                    # print(n_text)
                     n_text = font.render(str(abs(output)), True, pg.Color("red"))
+                    # print(n_text)
+                    SCREEN.blit(n_text, pg.Vector2((col * 80) + offset + 3, (row * 80) + offset - 3))
+                elif output < -9:
+                    n_text = font.render('0', True, pg.Color("black"))
                     SCREEN.blit(n_text, pg.Vector2((col * 80) + offset + 3, (row * 80) + offset - 3))
                 col += 1
             row += 1
@@ -115,15 +118,18 @@ class Board:
             if check_for_mistake(input, x, y, self.solution):
                 print(input)
                 self.number_grid[y][x] = input
+            else:
+                self.number_grid[y][x] = '-10'
         elif event.button == 3:
             print("Right click detected")
             input = InputBox(x, y, True).display()
             print(input)
             self.number_grid[y][x] = input
         else:
-           self.number_grid[y][x] = '0'
+           self.number_grid[y][x] = '-10'
         print("End of handle_click")
         print(input)
+        pprint(self.number_grid)
 
 
     def make_note(self, x, y):
