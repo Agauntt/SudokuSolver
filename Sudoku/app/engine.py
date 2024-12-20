@@ -1,5 +1,6 @@
 import os, sys
 import requests
+
 from pprint import pprint
 
 
@@ -11,13 +12,11 @@ def get_starting_board():
     return  res['value'], res['solution']
 
 
-
 def is_game_over(board, solution):
     return True if board == solution else False
-    
 
 
-def check_for_mistake(guess, x, y, solution):
+def check_for_mistake(guess, x, y, solution, note = False):
     if solution[y][x] == int(guess):
         return True
     return False
