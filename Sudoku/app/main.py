@@ -1,7 +1,4 @@
-import pandas as pd
-import numpy as np
-
-from app.models import Board
+from app.models import Board, InputBox
 
 
 def main():
